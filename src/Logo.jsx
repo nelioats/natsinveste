@@ -4,7 +4,7 @@ export default function LogoNats() {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 410 100" /* Ajustado o box para eliminar sobras laterais */
       width="100%"
-      style={{ maxWidth: "500px", display: "block", margin: "0 auto" }}
+      style={{ maxWidth: "550px", display: "block", margin: "0 auto" }}
     >
       <defs>
         <linearGradient id="natsModernGrad" x1="0%" y1="100%" x2="100%" y2="0%">

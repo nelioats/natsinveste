@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import LogoNats from "./Logo";
 
@@ -20,6 +20,7 @@ export default function TaxasEconomicas() {
   const [qntprazo, setQntPrazo] = useState("");
 
   const [resultado, setResultado] = useState("");
+  const resultadoRef = useRef(null);
 
   //================================
   // FORMATAR VALOR INVESTIDO DEVIDO MASCARA APLICADA NO CAMPO
@@ -305,6 +306,16 @@ export default function TaxasEconomicas() {
     fetchTaxas();
   }, []);
 
+  // 3. Adicione este useEffect para rolar a página assim que o resultado aparecer
+  useEffect(() => {
+    if (resultado && resultadoRef.current) {
+      resultadoRef.current.scrollIntoView({
+        behavior: "smooth", // Faz o efeito de descida suave
+        block: "start", // Alinha o topo do elemento no topo da tela
+      });
+    }
+  }, [resultado]); // Esse efeito roda toda vez que o estado 'resultado' mudar
+
   if (loading) return <p>Carregando taxas do Banco Central...</p>;
   if (error) return <p>{error}</p>;
 
@@ -397,7 +408,9 @@ export default function TaxasEconomicas() {
         {/* Apresentação dos Resultados Simulados */}
         {resultado && (
           <div className="results-container">
-            <h3 className="results-title">Resultado da Simulação</h3>
+            <h3 ref={resultadoRef} className="results-title">
+              Resultado da Simulação
+            </h3>
 
             <div className="result-row">
               <span className="label">Valor Inicial</span>
@@ -469,11 +482,8 @@ export default function TaxasEconomicas() {
   );
 }
 
-
 // git add .
 // git commit -m "ajuste: melhoria no layout"
 // git push origin main
-
-
 
 // npm run deploy

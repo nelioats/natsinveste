@@ -468,3 +468,12 @@ export default function TaxasEconomicas() {
     </div>
   );
 }
+
+
+// git add .
+// git commit -m "ajuste: melhoria no layout"
+// git push origin main
+
+
+
+// npm run deploy
